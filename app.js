@@ -1,5 +1,3 @@
-const { floralwhite } = require("color-name")
-
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid')
     const doodler = document.createElement('div')
@@ -56,13 +54,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function jump(){
-        upTinerId = setInterval(function () {
+        clearInterval(downTimerId)
+        upTimerId = setInterval(function () {
             doodlerBottomSpace += 20
             doodler.style.bottom = doodlerBottomSpace + 'px'
             if (doodlerBottomSpace > 350) {
                 fall()
             }
-        })
+        },30)
+    }
+
+    function fall() {
+        clearInterval(upTimerId)
+        downTimerId = setInterval(function () {
+            doodlerBottomSpace -= 5
+            doodler.style.bottom = doodlerBottomSpace + 'px'
+        },30)
     }
 
     function start() {
